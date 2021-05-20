@@ -1,12 +1,13 @@
 using System;
 public static class Kata
 {
-    private static int getLower(int n)
+    private static long getLower(long n)
     {
 
-        // just count thr rows (3 + 2 + 1)
+        // just count the rows 
+        // getLower(4) = (1 + 2 + 3) where each int represents number of odd numbers per row
         int rows = 1; // current row
-        int countSum = 0; // counts current sum
+        int countSum = 1; // counts current sum
 
         // each row carries 'rows' number of odd ints, so add +2 to countSum
         while (rows < n)
@@ -15,6 +16,7 @@ public static class Kata
             {
                 countSum += 2;
             }
+            rows++;
         }
         return countSum;
 
@@ -22,21 +24,12 @@ public static class Kata
 
     public static long rowSumOddNumbers(long n)
     {
-        // TODO
-        // rowSumOddNumbers(4) = 3 + 2 + 1
-        //getLower(System.out.println(countSum));
 
-
-
-        // 1
-        // 2
-        // 3
-        // 4
-        // 5
+        return 3;
 
     }
     static void Main(String[] args)
     {
-        Console.WriteLine(getLower(4));
+        Console.WriteLine(getLower(5));
     }
 }
