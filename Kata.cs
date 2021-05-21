@@ -1,58 +1,62 @@
 using System;
+
 public static class Kata
 {
     /// <summary>
-    /// gets the lowest odd number of n row
+    /// Array which converts an int say 1234 to an array = {1,2,3,4}
+    /// This code is from stack over
     /// </summary>
-    /// <param name="n"> row in which lowest number is found</param>
-    /// <returns>lowest odd number of n row</returns>
-    private static long getLower(long n)
+    /// <param name="num"></param>
+    /// <returns></returns>
+    public static int[] intToArray(int num)
     {
-        // just count the rows 
-        // getLower(4) = (1 + 2 + 3) where each int represents number of odd numbers per row
-        int rows = 1; // current row
-        int countSum = 1; // counts current sum
-        // each row carries 'rows' number of odd ints, so add +2 to countSum
-        while (rows < n)
+        String numString = num.ToString();
+        int[] numbers = new int[numString.Length];
+        for (int i = 0; i < numString.Length; i++)
         {
-            for (int i = 0; i < rows; i++)
+            numbers[i] = Convert.ToInt32(numString[i]) - 48; // Converts to ascii, -48 to get pure int value
+        }
+        return numbers;
+    }
+    public static int DescendingOrder(int n)
+    {
+        int numVariables = (int)Math.Floor(Math.Log10(n) + 1); // assuming no negative ints
+        int[] array = intToArray(n); // Array of int values
+
+        // Selection sort
+        int largestNumber = -1; // assuming no negatives in input, even a 0 is larger than this
+        int save = -1;
+        for (int i = 0; i < numVariables; i++)
+        {
+            if (!(i >= 1 && array[i] == array[i - 1]))
             {
-                countSum += 2;
+                for (int j = i; j < numVariables; j++)
+                {
+                    if (largestNumber < array[j])
+                    {
+                        largestNumber = j;
+                    }
+                    // swap
+                    save = array[i];
+                    array[i] = largestNumber;
+                    array[largestNumber] = save;
+
+                }
             }
-            rows++;
-        }
-        return countSum;
-    }
 
-    /// <summary>
-    /// Of odd number pyramid, finds the sum of the inputted row
-    /// </summary>
-    /// <param name="n">
-    /// Selected row in which sum of odds will be found
-    /// </param>
-    /// <returns>
-    /// Sum of n row
-    /// </returns>
-    public static long rowSumOddNumbers(long n)
-    {
-        long sum = getLower(n);
-        long sum_row = 0;
-        for (int i = 0; i < n; i++)
+        }
+        for (int i = 0; i < array.Length; i++)
         {
-            sum_row += (2 * i) + sum;
+            Console.WriteLine(array[i]);
         }
-        return sum_row;
+
+        return numVariables;
     }
 
-
-    static long kataSolution_rowSumOddNumbers(long n)
-    {
-        return (n ^ 3);
-    }
     static void Main(String[] args)
     {
-        Console.WriteLine(rowSumOddNumbers(1));
-        Console.WriteLine(rowSumOddNumbers(2));
-        Console.WriteLine(rowSumOddNumbers(2));
+        Console.WriteLine(DescendingOrder(123));
+
+
     }
 }
