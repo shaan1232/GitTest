@@ -1,6 +1,11 @@
 using System;
 public static class Kata
 {
+    /// <summary>
+    /// gets the lowest odd number of n row
+    /// </summary>
+    /// <param name="n"> row in which lowest number is found</param>
+    /// <returns>lowest odd number of n row</returns>
     private static long getLower(long n)
     {
         // just count the rows 
@@ -19,7 +24,15 @@ public static class Kata
         return countSum;
     }
 
-
+    /// <summary>
+    /// Of odd number pyramid, finds the sum of the inputted row
+    /// </summary>
+    /// <param name="n">
+    /// Selected row in which sum of odds will be found
+    /// </param>
+    /// <returns>
+    /// Sum of n row
+    /// </returns>
     public static long rowSumOddNumbers(long n)
     {
         long sum = getLower(n);
@@ -30,9 +43,16 @@ public static class Kata
         }
         return sum_row;
     }
+
+
+    static long kataSolution_rowSumOddNumbers(long n)
+    {
+        return (n ^ 3);
+    }
     static void Main(String[] args)
     {
         Console.WriteLine(rowSumOddNumbers(1));
+        Console.WriteLine(rowSumOddNumbers(2));
         Console.WriteLine(rowSumOddNumbers(2));
     }
 }
