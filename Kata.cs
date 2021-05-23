@@ -3,23 +3,28 @@ public class Kata
 {
     public static int FindEvenIndex(int[] arr)
     {
-        int upper = 0;
-        int lower = 0;
+        int right = 0;
+        int left = 0;
         int counter = arr.Length - 1;
         for (int i = 0; i < arr.Length; i++)
         {
-            lower += arr[i];
+            left += arr[i];
         }
-        for (int i = arr.Length - 1; i >= 0; i--)
+        if (left == 0)
         {
-            if (upper != lower)
+            return 0;
+        }
+        left -= arr[arr.Length - 1];
+        for (int i = arr.Length - 1; i > 0; i--)
+        {
+            if (right != left)
             {
-                lower -= arr[i];
-                upper += arr[i];
+                left -= arr[i - 1];
+                right += arr[i];
             }
-            printStatus(upper, lower);
+            printStatus(right, left);
             counter--;
-            if (upper == lower)
+            if (right == left)
             {
                 return counter;
             }
@@ -35,14 +40,13 @@ public class Kata
     {
         Console.WriteLine(input);
     }
-    static void printStatus(int upper, int lower)
+    static void printStatus(int right, int left)
     {
-        print("Upper:" + upper + " Lower:" + lower);
+        print("right:" + right + " left:" + left);
     }
     static void Main(String[] args)
     {
-        int[] arr = { 1, 100, 50, -51, 1, 1 };
+        int[] arr = { 1, 2, 3, 4, 5, 6 };
         print(FindEvenIndex(arr));
-        print(FindEvenIndex(ar1r));
     }
 }
