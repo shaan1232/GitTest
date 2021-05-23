@@ -1,31 +1,48 @@
 using System;
-public class DigPow
+public class Kata
 {
-
-    private static int getSum(int n, int p)
+    public static int FindEvenIndex(int[] arr)
     {
-        string number = Convert.ToString(n);
-        int sum = 0;
-        int _sum;
-        Console.WriteLine(n);
-        for (int i = 0; i < number.Length; i++)
+        int upper = 0;
+        int lower = 0;
+        int counter = arr.Length - 1;
+        for (int i = 0; i < arr.Length; i++)
         {
-            _sum = (Convert.ToInt32(number[i]) - 48);
-            Console.WriteLine("_sum: " + _sum);
-            sum += (int)Math.Pow(_sum, i + p);
+            lower += arr[i];
         }
-        return sum;
+        for (int i = arr.Length - 1; i >= 0; i--)
+        {
+            if (upper != lower)
+            {
+                lower -= arr[i];
+                upper += arr[i];
+            }
+            printStatus(upper, lower);
+            counter--;
+            if (upper == lower)
+            {
+                return counter;
+            }
+        }
+        return -1;
     }
 
-    public static long digPow(int n, int p)
+    static void print(int input)
     {
-        // your code
-        // get sum
-        return getSum(n, p);
+        Console.WriteLine(input);
     }
-
+    static void print(String input)
+    {
+        Console.WriteLine(input);
+    }
+    static void printStatus(int upper, int lower)
+    {
+        print("Upper:" + upper + " Lower:" + lower);
+    }
     static void Main(String[] args)
     {
-        Console.WriteLine(digPow(695, 2));
+        int[] arr = { 1, 100, 50, -51, 1, 1 };
+        print(FindEvenIndex(arr));
+        print(FindEvenIndex(ar1r));
     }
 }
